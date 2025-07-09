@@ -83,20 +83,43 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Petugas</h2>
-                  <form action="{{ route('petugas.store') }}" class="form" method="post">
-                    @csrf
-                    <label for="">Nama Petugas</label>
-                    <input type="text" class="form-control" name="name">
+                  <div class="buy-now">
+          <a
+        href="{{ route('lantai.create') }}"
+        class="btn btn-info "
+        >Tambah lantai</a
+      >
+    </div>
+                  <table>
+                    <table class="table" id="datagedung">
+                    <thead>
+                      <th>No</th>
+                      <th>Nama Gedung</th>
+                      <th>Aksi</th>
+                    </thead>
+                     <tbody>
+                      @foreach ($lantai as $lokasi)
+                     <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $lokasi->lantai}}</td>
+                        <td>{{ $lokasi->gedung->nama_gedung }}</td>
+                        
+                        <td><a href="{{ route('lantai.edit', $lokasi->id) }}" class="btn btn-success">Edit</a>
+                        <form action="{{ route('lantai.destroy', $lokasi->id) }}" method="post" style="display:inline;" >
+                            @csrf
+                            @method('DELETE')
+                            <button  class="btn btn-danger">Hapus</button>
 
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" name="email">
+                        </form>
+                        </td>
+                      </tr>
+                      @endforeach
+                      </tbody>
+                      
 
-                    <label for="">Password</label>
-                    <input type="password" class="form-control" name="password">
                     
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
-                  </form>
+                  </table>
+                  </table>
                 </div>
               </div>
             </div>
@@ -141,21 +164,8 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js')}}"></script>
-    
-    <!-- jQuery  -->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      <!-- DataTables JS -->
-      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-  $(document).ready(function () {
-    $('#dataPetugas').DataTable({
-      responsive: true,
-      autoWidth: false
-    });
-  });
-</script>
-
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+    <script src="ttps://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.min.js"></script>
   </body>
 </html>

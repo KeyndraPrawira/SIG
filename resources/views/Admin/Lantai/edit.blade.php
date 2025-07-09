@@ -83,17 +83,20 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Petugas</h2>
-                  <form action="{{ route('petugas.store') }}" class="form" method="post">
+                    <h2>Tambah Data Gedung</h2>
+                  <form action="{{ route('lantai.update', $lantai->id) }}" class="form" method="post">
                     @csrf
-                    <label for="">Nama Petugas</label>
-                    <input type="text" class="form-control" name="name">
-
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" name="email">
-
-                    <label for="">Password</label>
-                    <input type="password" class="form-control" name="password">
+                    @method('PUT')
+                    <label for="">Lantai</label>
+                    <input type="number" class="form-control" name="lantai">
+                     <label for="">Gedung</label>
+                    <select name="gedung_id" id="" class="form-select">
+                        <option value="" disabled selected>Pilih salah satu gedung</option>
+                        @foreach ($gedung as $ged)
+                            <option value="{{ $ged->id }}">{{ $ged->nama_gedung }}</option>
+                        @endforeach
+                    </select>
+                    
                     
                     <button type="submit" class="btn btn-info mt-2">Tambah</button>
                   </form>
@@ -150,7 +153,7 @@
       <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
   $(document).ready(function () {
-    $('#dataPetugas').DataTable({
+    $('#dataGedung').DataTable({
       responsive: true,
       autoWidth: false
     });

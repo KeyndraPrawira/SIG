@@ -95,7 +95,13 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
+              <a href="{{route('kategori.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Kategori</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{{route('lantai.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Lantai</div>
               </a>

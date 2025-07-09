@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lantai extends Model
 {
+    protected $table = 'lantai';
     protected $fillable = ['lantai', 'gedung_id'];
     public function gedung()
     {

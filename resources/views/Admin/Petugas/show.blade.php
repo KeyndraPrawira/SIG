@@ -83,27 +83,35 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Petugas</h2>
-                  <form action="{{ route('petugas.store') }}" class="form" method="post">
-                    @csrf
-                    <label for="">Nama Petugas</label>
-                    <input type="text" class="form-control" name="name">
+                    <h2>Edit Data Petugas</h2>
+                  <form action="{{ route('petugas.show', $petugas->id) }}" class="form" method="post">
+                    
+                    <label for="">Nama Petugas</label>disabled
+                    <input type="text" value="{{ $petugas->name}}" disabled class="form-control" name="name">
 
                     <label for="">Email</label>
-                    <input type="email" class="form-control" name="email">
+                    <input type="email" value="{{$petugas->email}}" disa class="form-control" name="email">
 
                     <label for="">Password</label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" value="{{ $petugas->password }}" class="form-control" name="password">
                     
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
+                    
                   </form>
+                  <a href="{{ route('petugas.index') }}" class="btn btn-warning mt-2">Kembali</a>
                 </div>
               </div>
             </div>
             <!-- / Content -->
 
             <!-- Footer -->
-            
+            <div class="buy-now">
+      <a
+        href="{{ route('petugas.create') }}"
+        target="_blank"
+        class="btn btn-info btn-buy-now"
+        >Tambah Petugas</a
+      >
+    </div>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

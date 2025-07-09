@@ -83,19 +83,16 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Petugas</h2>
-                  <form action="{{ route('petugas.store') }}" class="form" method="post">
+                    <h2>Edit Data Gedung</h2>
+                  <form action="{{ route('kategori.update', $kategori->id) }}" class="form" method="post">
                     @csrf
-                    <label for="">Nama Petugas</label>
-                    <input type="text" class="form-control" name="name">
+                    @method('PUT')
+                    <label for="">Nama Kategori</label>
+                    <input type="text" value="{{ $kategori->nama_kategori }}" class="form-control" name="nama_kategori">
 
-                    <label for="">Email</label>
-                    <input type="email" class="form-control" name="email">
-
-                    <label for="">Password</label>
-                    <input type="password" class="form-control" name="password">
                     
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
+                    
+                    <button type="submit" class="btn btn-success mt-2">Edit</button>
                   </form>
                 </div>
               </div>
@@ -150,7 +147,7 @@
       <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
   $(document).ready(function () {
-    $('#dataPetugas').DataTable({
+    $('#dataKategori').DataTable({
       responsive: true,
       autoWidth: false
     });

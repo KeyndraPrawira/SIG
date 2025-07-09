@@ -106,7 +106,7 @@
                         @endif </td>
                         <td><a href="{{ route('petugas.edit', $user->id) }}" class="btn btn-success">Edit</a>
                         <a href="{{ route('petugas.show', $user->id) }}" class="btn btn-warning">Detail</a>
-                        <form action="{{ route('petugas.destroy', $order->id) }}" method="post" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus order ini?')">
+                        <form action="{{ route('petugas.destroy', $user->id) }}" method="post" style="display:inline;" >
                             @csrf
                             @method('DELETE')
                             <button  class="btn btn-danger btn-sm">Hapus</button>
@@ -185,6 +185,7 @@
     });
   });
 </script>
+@include('sweetalert::alert')
 
   </body>
 </html>

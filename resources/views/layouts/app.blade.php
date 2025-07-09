@@ -56,6 +56,7 @@
     
         <main class="py-4">
             @yield('content')
+            @include('sweetalert::alert')
         </main>
     </div>
      <script src="{{ asset('Admin/vendor/libs/jquery/jquery.js')}}"></script>

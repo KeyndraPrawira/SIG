@@ -86,16 +86,17 @@
                     <h2>Edit Data Petugas</h2>
                   <form action="{{ route('petugas.update', $petugas->id) }}" class="form" method="post">
                     @csrf
+                    @method('PUT')
                     <label for="">Nama Petugas</label>
                     <input type="text" value="{{ $petugas->name}}" class="form-control" name="name">
 
                     <label for="">Email</label>
-                    <input type="email" {{$petugas->email}} class="form-control" name="email">
+                    <input type="email" value="{{$petugas->email}}" class="form-control" name="email">
 
                     <label for="">Password</label>
                     <input type="password" value="{{ $petugas->password }}" class="form-control" name="password">
                     
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
+                    <button type="submit" class="btn btn-success mt-2">Edit</button>
                   </form>
                 </div>
               </div>

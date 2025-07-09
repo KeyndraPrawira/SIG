@@ -40,7 +40,8 @@ class KategoriController extends Controller
         $kategori ->nama_kategori = $request->nama_kategori;
         $kategori->save();
 
-        return redirect()->route('kategori.index')->toast('success', 'Kategori berhasil dibuat');
+        toast('Kategori berhasil diperbarui', 'success')->position('bottom-end');
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -58,7 +59,7 @@ class KategoriController extends Controller
     public function edit(string $id)
     {
         $kategori = Kategori::findOrFail($id);
-        return view('kategori.edit', compact('kategori'));
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
     /**

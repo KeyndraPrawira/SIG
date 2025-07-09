@@ -31,7 +31,7 @@ class GedungController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'nama_gedung' => 'required|string|max:255|unique',
+        'nama_gedung' => 'required|string|max:255|unique:gedung',
         ], [
         'nama_gedung' => 'Nama gedung harus diisi dan tidak boleh sama',
         ]

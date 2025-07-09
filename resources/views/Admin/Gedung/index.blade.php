@@ -44,7 +44,11 @@
     <link rel="stylesheet" href="{{ asset('Admin/vendor/libs/apex-charts/apex-charts.css')}}" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap5.min.css">
+   <!-- DataTables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+      
+
     <!-- Helpers -->
     <script src="{{ asset('Admin/vendor/js/helpers.js')}}"></script>
 
@@ -80,7 +84,33 @@
               <div class="row">
                 <div class="col">
                   <table>
+                    <table class="table" id="datagedung">
+                    <thead>
+                      <th>No</th>
+                      <th>Nama Gedung</th>
+                      <th>Aksi</th>
+                    </thead>
+                     <tbody>
+                      @foreach ($gedung as $user)
+                     <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $user->nama_gedung }}</td>
+                        
+                        <td><a href="{{ route('gedung.edit', $user->id) }}" class="btn btn-success">Edit</a>
+                        <form action="{{ route('gedung.destroy', $user->id) }}" method="post" style="display:inline;" >
+                            @csrf
+                            @method('DELETE')
+                            <button  class="btn btn-danger">Hapus</button>
+
+                        </form>
+                        </td>
+                      </tr>
+                      @endforeach
+                      </tbody>
+                      
+
                     
+                  </table>
                   </table>
                 </div>
               </div>
@@ -88,7 +118,13 @@
             <!-- / Content -->
 
             <!-- Footer -->
-            <
+            <div class="buy-now">
+      <a
+        href="{{ route('gedung.create') }}"
+        class="btn btn-info btn-buy-now"
+        >Tambah gedung</a
+      >
+    </div>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

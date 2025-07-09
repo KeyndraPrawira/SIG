@@ -54,7 +54,8 @@ class PetugasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $petugas = User::findOrFail($id);
+        return view('admin.petugas.show', compact('petugas'));
     }
 
     /**
@@ -99,7 +100,7 @@ class PetugasController extends Controller
     public function destroy(string $id)
     {
         $petugas =User::findOrFail($id);
-        $petugas = User::delete();
+        $petugas->delete();
         toast('Petugas berhasil dihapus');
         return back();
     }
