@@ -93,7 +93,7 @@
                     <select name="gedung_id" id="" class="form-select">
                         <option value="" disabled selected>Pilih salah satu gedung</option>
                         @foreach ($gedung as $ged)
-                            <option value="{{ $ged->id }}">{{ $ged->nama_gedung }}</option>
+                            <option value="{{ $ged->id }}" {{ $ged->id == $lantai->gedung_id  ? 'selected':''}}>{{ $ged->nama_gedung }}</option>
                         @endforeach
                     </select>
                     
