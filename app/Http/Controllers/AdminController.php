@@ -10,7 +10,6 @@ class AdminController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        
         return view('Admin.index', compact('kategori'));
     }
 

@@ -5,6 +5,15 @@
               <div class="row">
                 <div class="col">
                     <h2>Edit Data Gedung</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('gedung.update', $gedung->id) }}" class="form" method="post">
                     @csrf
                     @method('PUT')

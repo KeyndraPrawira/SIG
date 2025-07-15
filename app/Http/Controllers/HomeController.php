@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fasilitas;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,8 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $fasilitas = Fasilitas::all();
+        $gedung = Gedung::all();
+        $ruangan = Ruangan::all();
+        return view('admin.index', compact('fasilitas', 'gedung', 'ruangan'));
     }
+
+    
 
     public function profile()
     {

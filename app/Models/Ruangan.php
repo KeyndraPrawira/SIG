@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ruangan extends Model
 {
-    protected $table = 'ruangan';
+    protected $table = 'ruangans';
 
     protected $fillable = [
         'nama_ruangan',
@@ -14,6 +14,7 @@ class Ruangan extends Model
         'deskripsi',
         'gambar',
         'lantai_id',
+        'denah'
     ];
 
     public function kategori()
@@ -29,5 +30,11 @@ class Ruangan extends Model
     public function fasilitas()
     {
         return $this->belongsToMany(Fasilitas::class, 'fasilitas_ruangan');
+    }
+
+    public function deleteImage(){
+        if($this->gambar && file_exists(public_path('images/produk/'. $this->gambar))){
+            return unlink(public_path('images/produk/'. $this->gambar));
+        }
     }
 }

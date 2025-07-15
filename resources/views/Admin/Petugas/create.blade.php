@@ -84,6 +84,15 @@
               <div class="row">
                 <div class="col">
                     <h2>Tambah Data Petugas</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('petugas.store') }}" class="form" method="post">
                     @csrf
                     <label for="">Nama Petugas</label>

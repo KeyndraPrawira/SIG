@@ -39,7 +39,7 @@ class FasilitasController extends Controller
         $fasilitas = new Fasilitas();
         $fasilitas->nama_fasilitas  = $request->nama_fasilitas;
         $fasilitas->save();
-        toast('fasilitas berhasil ditambahkan', 'success');
+        toast('fasilitas berhasil ditambahkan', 'success')->position('bottom-end');
         return redirect()->route('fasilitas.index');
     }
 
@@ -77,7 +77,7 @@ class FasilitasController extends Controller
         $fasilitas = Fasilitas::findOrFail($id);
         $fasilitas->nama_fasilitas = $request->nama_fasilitas;
         $fasilitas->save();
-        toast('Data fasilitas berhasil diperbarui', 'success');
+        toast('Data fasilitas berhasil diperbarui', 'success')->position('bottom-end');
         return redirect()->route('fasilitas.index');
     }
 
@@ -88,7 +88,7 @@ class FasilitasController extends Controller
     {
         $fasilitas = Fasilitas::findOrFail($id);
         $fasilitas->delete();
-        toast('fasilitas berhasil dihapus', 'success');
+        toast('fasilitas berhasil dihapus', 'success')->position('bottom-end');
         return back();
     }
 }

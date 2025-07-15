@@ -41,7 +41,7 @@ class GedungController extends Controller
         $gedung->nama_gedung = $request->nama_gedung;
         $gedung->save();
         
-        toast('Gedung berhasil ditambahkan', 'success');
+        toast('Gedung berhasil ditambahkan', 'success')->position('bottom-end');
         return redirect()->route('gedung.index');
     }
 
@@ -77,7 +77,7 @@ class GedungController extends Controller
         $gedung = Gedung::findOrFail($id);
         $gedung->nama_gedung = $request->nama_gedung;
         $gedung->save();
-        toast('Gedung berhasil diperbarui', 'success');
+        toast('Gedung berhasil diperbarui', 'success')->position('bottom-end');
         return redirect()->route('gedung.index');
     }
 
@@ -88,7 +88,7 @@ class GedungController extends Controller
     {
         $gedung = Gedung::findOrFail($id);
         $gedung = Gedung::delete();
-         toast('Data berhasil dihapus', 'success');
-        return back();
+         toast('Data berhasil dihapus', 'success')->position('bottom-end');
+        return redirect()->route('gedung.index', compact('gedung'));
     }
 }

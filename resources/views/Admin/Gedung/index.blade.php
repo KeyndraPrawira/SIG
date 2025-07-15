@@ -1,9 +1,12 @@
 @extends('layouts.admin')
 
-@include('content')
+@section('content')
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
+                  <div>
+                    <a href="{{ route('gedung.create') }}" class="btn btn-info">Tambah Gedung</a>
+                  </div>
                   <table>
                     <table class="table" id="dataGedung">
                     <thead>
@@ -19,7 +22,7 @@
                         
                         <td><a href="{{ route('gedung.edit', $ged->id) }}" class="btn btn-success">Edit</a>
                         <a href="{{ route('gedung.destroy', $ged->id) }}"></a>
-                        <form action="{{ route('petugas.destroy', $user->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
+                        <form action="{{ route('gedung.destroy', $ged->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
                             @csrf
                             @method('DELETE')
                             <button  class="btn btn-danger ">Hapus</button>

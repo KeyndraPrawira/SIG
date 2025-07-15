@@ -13,13 +13,16 @@ use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
+Route::get('/tentang', [FrontendController::class, 'about'])->name('tentang');
 
-
+Route::get('/gedung/{id}', [FrontendController::class, 'filter'])->name('ruangan.filter');
+Route::get('/{id}/detail', [FrontendController::class, 'show'])->name('detail.show');
 
 
 Auth::routes();
 
-Route::prefix('admin')->middleware('auth', Admin::class)->group(function (){
+Route::prefix('dashboard')->middleware('auth', Admin::class)->group(function (){
+    Route::get('/', [HomeController::class, 'index'])->name('admin.index');
     Route::resource('kategori', KategoriController::class);
      Route::resource('petugas', PetugasController::class);
      Route::resource('gedung', GedungController::class);
@@ -28,5 +31,7 @@ Route::prefix('admin')->middleware('auth', Admin::class)->group(function (){
      Route::resource('ruangan',RuanganController::class); 
 });
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
 

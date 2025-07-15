@@ -102,7 +102,7 @@
                     <label for="" class="mt-2" >Kategori</label>
                     <select name="kategori_id" id="" class="form-select ">
                         @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}" {{ $kat->id == $ruangan->kategori_id ? 'selected' : ''}} >{{ $kat->nama_kategori }}</option>
+                            <option value="{{ $kat->id }}" {{ $kat->id == $ruangan->kategori_id ? 'selected' : ''}} >{{ $kat->kategori }}</option>
                         @endforeach
                     </select>
 
@@ -118,9 +118,16 @@
                         Fasilitas
                     </label><br>
                     
-                       @foreach ($fasilitas as $fas)
-                     <input type="checkbox"  class="form-checkbox mt-1" id="checkbox" value="{{ $fas->id }}" {{ $fasilitas->contains('id', $fas->id) ? 'checked' : '' }}> <span for="#checkbox"> {{ $fas->nama_fasilitas }}</span> <br>
-                       @endforeach
+                      @foreach ($fasilitas as $fas)
+                          <input type="checkbox" 
+                                class="form-checkbox mt-1" 
+                                name="fasilitas_id[]" 
+                                value="{{ $fas->id }}" 
+                                {{ in_array($fas->id, $fasilitas_terpilih) ? 'checked' : '' }}>
+                          <label>{{ $fas->nama_fasilitas }}</label>
+                          <br>
+                      @endforeach
+
                     <br>
                     <label for="" class="mt-1">
                         Deskripsi
@@ -136,10 +143,20 @@
                                 <p>Tidak Ada</p>
                             
                             @endif
-                            
+
                     <input type="file" class="form-control" name="gambar">
-                    
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
+                    <label for="" class="mt-1">
+                        Denah
+                    </label><br>
+                    @if($ruangan->denah)
+                                <img src="{{asset('storage/'.$ruangan->denah)  }}" class="mb-2" width="100px" height="50px" alt="">
+                            @else
+                                <p>Tidak Ada</p>
+                            
+                            @endif
+                    <input type="file" class="form-control" name="denah">
+                    <button type="submit" class="btn btn-success mt-2">Edit</button>
+                    <a href="{{ route('ruangan.index') }}" class="btn btn-info mt-2">Batal</a>
                   </form>
                 </div>
               </div>

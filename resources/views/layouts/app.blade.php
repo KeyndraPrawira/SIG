@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{ asset('Admin/vendor/libs/apex-charts/apex-charts.css')}}" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="{{asset('Admin/vendor/css/pages/page-auth.css')}}" />
 
     <!-- Helpers -->
     <script src="{{ asset('Admin/vendor/js/helpers.js')}}"></script>

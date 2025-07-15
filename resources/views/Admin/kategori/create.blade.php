@@ -6,11 +6,20 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Gedung</h2>
+                    <h2>Tambah Data Kategori</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('kategori.store') }}" class="form" method="post">
                     @csrf
-                    <label for="">Nama Gedung</label>
-                    <input type="text" class="form-control" name="nama_kategori">
+                    <label for="">Nama Kategori</label>
+                    <input type="text" class="form-control" name="kategori">
 
                     
                     

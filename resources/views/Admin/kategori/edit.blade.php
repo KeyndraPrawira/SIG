@@ -15,8 +15,8 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-
+    <title>Edit Kategori</title>
+        
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -83,14 +83,30 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Edit Data Gedung</h2>
+                    <h2>Edit Data Kategori</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('kategori.update', $kategori->id) }}" class="form" method="post">
                     @csrf
                     @method('PUT')
                     <label for="">Nama Kategori</label>
-                    <input type="text" value="{{ $kategori->nama_kategori }}" class="form-control" name="nama_kategori">
-
-                    
+                    <input type="text" value="{{ $kategori->kategori }}" class="form-control" name="kategori">
                     
                     <button type="submit" class="btn btn-success mt-2">Edit</button>
                   </form>

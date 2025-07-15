@@ -16,8 +16,12 @@ return new class extends Migration
             $table->string('nama_ruangan');
             $table->unsignedBigInteger('kategori_id');
             $table ->text('deskripsi')->nullable();
+              $table->unsignedBigInteger('lantai_id');
             $table->string('gambar');
-           $table->unsignedBigInteger('lantai_id');
+            $table->string('denah');
+            
+         
+
             $table->timestamps();
 
             

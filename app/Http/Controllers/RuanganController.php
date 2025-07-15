@@ -23,6 +23,7 @@ class RuanganController extends Controller
         $lantai = Lantai::all();
         $fasilitas =Fasilitas::all();
         
+        
         return view('admin.ruangan.index', compact('ruangan', 'kategori','lantai', 'fasilitas'));
     }
 
@@ -43,7 +44,7 @@ class RuanganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_ruangan' => 'required|unique:ruangan,nama_ruangan',
+            'nama_ruangan' => 'required|unique:ruangans,nama_ruangan',
             'kategori_id' => 'required',
             'deskripsi' => 'nullable',
             'gambar' => 'required',
@@ -57,11 +58,17 @@ class RuanganController extends Controller
             'lantai_id' => 'Pilih lokasi ruangan',
         ]);
 
-        $data = $request->only(['nama_ruangan', 'kategori_id', 'deskripsi', 'lantai_id', 'gambar']);
+        $data = $request->only(['nama_ruangan', 'kategori_id', 'deskripsi', 'lantai_id', 'gambar', 'denah']);
         if ($request->hasFile('gambar')) {
             $path = $request->file('gambar')->store('gambar_ruangan', 'public'); 
             $data['gambar'] = $path;
         }
+
+        if ($request->hasFile('denah')) {
+            $path = $request->file('denah')->store('gambar_denah', 'public'); 
+            $data['denah'] = $path;
+        }
+
         $ruangan = Ruangan::create($data);
         $request->all($data);
         if ($request->has('fasilitas_id')) {
@@ -82,8 +89,9 @@ class RuanganController extends Controller
         $ruangan = Ruangan::findOrFail($id);
         $kategori = Kategori::all();
         $fasilitas = Fasilitas::all();
+        $fasilitas_terpilih = $ruangan->fasilitas->pluck('id')->toArray();
         $lantai = Lantai::all();
-        return view('admin.ruangan.show', compact('ruangan', 'kategori', 'fasilitas', 'lantai'));
+        return view('admin.ruangan.show', compact('ruangan', 'kategori', 'fasilitas', 'lantai', 'fasilitas_terpilih'));
     }
 
     /**
@@ -94,9 +102,13 @@ class RuanganController extends Controller
         $ruangan = Ruangan::with('fasilitas')->findOrFail($id);
         $kategori = Kategori::all();
         $fasilitas = Fasilitas::all();
+        $fasilitas_terpilih = $ruangan->fasilitas->pluck('id')->toArray();
         $lantai = Lantai::all();
-        return view('admin.ruangan.edit', compact('ruangan', 'kategori', 'lantai', 'fasilitas'));
-    }
+
+    return view('admin.ruangan.edit', compact('ruangan', 'fasilitas', 'fasilitas_terpilih', 'kategori', 'lantai'));
+}
+
+        
 
     /**
      * Update the specified resource in storage.
@@ -110,29 +122,40 @@ class RuanganController extends Controller
             'deskripsi' => 'nullable',
             'gambar' => 'required',
             'fasilitas_id' => 'nullable',
-            'lantai_id' => 'required'
+            'lantai_id' => 'required',
+            'denah' => 'required'
         ],
         [
             'nama_ruangan' => 'Nama ruangan harus diisi',
             'kategori_id' => 'Pilih salah satu kategori',
             'gambar' => 'Masukkan gambar ruangan',
             'lantai_id' => 'Pilih lokasi ruangan',
+            'denah' => 'Masukkan gambar denah'
         ]);
 
         $data = $request->only(['nama_ruangan', 'kategori_id', 'deskripsi', 'lantai_id', 'gambar']);
-        if ($request->hasFile('gambar')) {
-            if ($ruangan->gambar) {
-                Storage::disk('public')->delete($ruangan->gambar);
-                $path = $request->file('gambar')->store('gambar_ruangan', 'public'); 
-                $data['gambar'] = $path;
+        
+        if ($ruangan->gambar && Storage::disk('public')->exists($ruangan->gambar)) {
+            $ruangan->deleteImage();
+        }
+        $path = $request->file('gambar')->store('gambar_ruangan', 'public'); 
+        $data['gambar'] = $path;
+
+
+        if ($request->hasFile('denah')) {
+            if ($ruangan->denah) {
+                $ruangan->deleteImage();
+               
             }
+             $path = $request->file('denah')->store('gambar_denah', 'public'); 
+                $data['denah'] = $path;
         }
 
         $ruangan->update($data);
 
         $ruangan->fasilitas()->sync($request->fasilitas_id ?? []);
 
-        toast('Ruangan berhasil diperbarui', 'success');
+        toast('Ruangan berhasil diperbarui', 'success')->position('bottom-end');
         return redirect()->route('ruangan.index');
     }
 
@@ -149,7 +172,7 @@ class RuanganController extends Controller
         $ruangan->fasilitas()->detach();
         $ruangan->delete();
 
-        toast('Ruangan berhasil dihapus', 'success');
+        toast('Ruangan berhasil dihapus', 'success')->position('bottom-end`');
         return back();
         }
 }

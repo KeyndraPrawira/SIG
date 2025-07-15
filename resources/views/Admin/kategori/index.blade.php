@@ -24,10 +24,10 @@
                       @foreach ($kategori as $kat)
                      <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $kat->nama_kategori}}</td>
+                        <td>{{ $kat->kategori}}</td>
                         
                         <td><a href="{{ route('kategori.edit', $kat->id) }}" class="btn btn-success">Edit</a>
-                        <form action="{{ route('petugas.destroy', $kat->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
+                        <form action="{{ route('kategori.destroy', $kat->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
                             @csrf
                             @method('DELETE')
                             <button  class="btn btn-danger ">Hapus</button>

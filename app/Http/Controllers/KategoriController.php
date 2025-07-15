@@ -33,11 +33,14 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255',
-        ]);
+            'kategori' => 'required|string|unique:kategoris,kategori',
+        ],
+    [
+        'kategori' => 'Kategori harus diisi dan tidak boleh sama!',
+    ]);
 
         $kategori = new Kategori();
-        $kategori ->nama_kategori = $request->nama_kategori;
+        $kategori ->kategori = $request->kategori;
         $kategori->save();
 
         toast('Kategori berhasil diperbarui', 'success')->position('bottom-end');
@@ -68,13 +71,14 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_kategori' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
         ]);
 
         $kategori = Kategori::findOrFail($id);
-        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->kategori = $request->kategori;
         $kategori->save();
 
+        toast('kategori berhasil dihapus', type: 'success')->position('bottom-end');
         return redirect()->route('kategori.index')->with('success', 'Kategori updated successfully.');
     }
 
@@ -85,7 +89,8 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
-        toast('kategori berhasil dihapus', 'success');
-        return redirect()->route('kategori.index')->toast('success', 'Kategori berhasil dihapus');
+        toast('kategori berhasil dihapus', type: 'success')->position('bottom-end');
+
+        return redirect()->route('kategori.index');
     }
 }

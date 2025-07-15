@@ -99,6 +99,6 @@ class lantaiController extends Controller
         $lantai = Lantai::findOrFail($id);
         $lantai->delete();
         toast('Lantai berhasil dihapus', 'success')->position('bottom-end');
-        return back();
+        return redirect()->route('lantai.index', compact('lantai'));
     }
 }

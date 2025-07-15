@@ -2470,8 +2470,8 @@ textarea.form-control-lg {
     opacity: 0.65; }
 
 .btn-primary {
-  color: #000;
-  background-color: #fc5404;
+  color: #ffffff;
+  background-color: #000000;
   border-color: #fc5404; }
   .btn-primary:hover {
     color: #000;
@@ -9724,7 +9724,11 @@ a {
       transition: .3s all ease;
       -webkit-transform: scale(1);
       -ms-transform: scale(1);
-      transform: scale(1); }
+      transform: scale(1);
+      object-fit: cover;
+      height: 260px;
+      width: 100%;
+    }
     .single-portfolio > a:hover:before {
       visibility: visible;
       opacity: 1; }
@@ -9757,6 +9761,12 @@ a {
 
 .person h3, .person .h3 {
   font-size: 20px; }
+
+#dataRuangan {
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto; 
+  }
 
 .social-2 li {
   display: inline-block; }

@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{ asset('Admin/vendor/libs/apex-charts/apex-charts.css')}}" />
 
     <!-- Page CSS -->
+     
    <!-- DataTables CSS -->
       <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
@@ -84,6 +85,15 @@
               <div class="row">
                 <div class="col">
                     <h2>Tambah Data Gedung</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('lantai.store') }}" class="form" method="post">
                     @csrf
                     <label for="">Lantai</label>

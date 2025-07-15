@@ -45,7 +45,7 @@ class PetugasController extends Controller
         $petugas->email = $request->email;
         $petugas->password = $request->password;
         $petugas->save();
-        toast('Data petugas berhasil ditambahkan', 'success');
+        toast('Data petugas berhasil ditambahkan', 'success')->position('bottom-end');
         return redirect()->route('petugas.index');
     }
 
@@ -88,7 +88,7 @@ class PetugasController extends Controller
         $petugas->email = $request->email;
         $petugas->password = $request->password;
         $petugas->save();
-        toast('Data petugas berhasil diperbarui.', 'success');
+        toast('Data petugas berhasil diperbarui.', 'success')->position('bottom-end');
         return redirect()->route('petugas.index');
     }
 
@@ -101,7 +101,7 @@ class PetugasController extends Controller
     {
         $petugas =User::findOrFail($id);
         $petugas->delete();
-        toast('Petugas berhasil dihapus');
+        toast('Petugas berhasil dihapus', 'success')->position('bottom-end');
         return back();
     }
 }

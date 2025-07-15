@@ -30,7 +30,7 @@
                         <td>{{ $lokasi->gedung->nama_gedung }}</td>
                         
                         <td><a href="{{ route('lantai.edit', $lokasi->id) }}" class="btn btn-success">Edit</a>
-                        <form action="{{ route('petugas.destroy', $lokasi->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
+                        <form action="{{ route('lantai.destroy', $lokasi->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
                             @csrf
                             @method('DELETE')
                             <button  class="btn btn-danger ">Hapus</button>

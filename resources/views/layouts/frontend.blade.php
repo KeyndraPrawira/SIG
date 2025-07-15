@@ -122,13 +122,13 @@
 
 			<div class="row g-4">
         @foreach ($ruangan as $ruang)
-				@foreach ($ruangan as $ruang)
+				
     <div>
         <p>Nama: {{ $ruang->nama_ruangan }}</p>
         <p>Gambar: {{ $ruang->gambar }}</p>
         <img src="{{ asset('storage/' . $ruang->gambar) }}" alt="{{ $ruang->nama_ruangan }}">
     </div>
-@endforeach
+
 
         @endforeach
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">

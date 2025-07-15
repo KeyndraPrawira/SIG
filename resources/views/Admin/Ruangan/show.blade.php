@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>SIG - Detail Ruangan</title>
 
     <meta name="description" content="" />
 
@@ -119,8 +119,14 @@
                     </label><br>
                     
                        @foreach ($fasilitas as $fas)
-                     <input type="checkbox"  class="form-checkbox mt-1"  id="checkbox" value="{{ $fas->id }}" {{ $fasilitas->contains('id', $fas->id) ? 'checked' : '' }} disabled> <span for="#checkbox"> {{ $fas->nama_fasilitas }}</span> <br>
-                       @endforeach
+                          <input type="checkbox"  disabled
+                                class="form-checkbox mt-1" 
+                                name="fasilitas_id[]" 
+                                value="{{ $fas->id }}" 
+                                {{ in_array($fas->id, $fasilitas_terpilih) ? 'checked' : '' }}>
+                          <label>{{ $fas->nama_fasilitas }}</label>
+                          <br>
+                      @endforeach
                     <br>
                     <label for="" class="mt-1">
                         Deskripsi
@@ -131,7 +137,20 @@
                         Gambar
                     </label><br>
                     @if($ruangan->gambar)
-                                <img src="{{asset('storage/'.$ruangan->gambar)  }}" class="mb-2" width="100px" height="50px" alt="">
+                                <img src="{{asset('storage/'.$ruangan->gambar)  }}" class="mb-2" width="300px" height="300px" alt="">
+                            @else
+                                <p>Tidak Ada</p>
+                            
+                            @endif
+                            
+                   
+                    <br>
+
+                    <label for="" class="mt-1">
+                        Denah
+                    </label><br>
+                    @if($ruangan->denah)
+                                <img src="{{asset('storage/'.$ruangan->denah)  }}" class="mb-2" width="300px" height="300px" alt="">
                             @else
                                 <p>Tidak Ada</p>
                             

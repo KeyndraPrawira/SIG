@@ -56,7 +56,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">SIG</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -69,7 +69,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="{{ route('home') }}" class="menu-link">
+              <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
@@ -88,15 +88,15 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('gedung.index') }}" class="menu-link">
+              <a href="{{route('fasilitas.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Gedung</div>
+                <div data-i18n="Basic">Fasilitas</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{route('kategori.index')}}" class="menu-link">
+              <a href="{{ route('gedung.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Kategori</div>
+                <div data-i18n="Basic">Gedung</div>
               </a>
             </li>
             <li class="menu-item">
@@ -106,11 +106,13 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{route('fasilitas.index')}}" class="menu-link">
+              <a href="{{route('kategori.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Fasilitas</div>
+                <div data-i18n="Basic">Kategori</div>
               </a>
             </li>
+            
+            
             <li class="menu-item">
               <a href="{{route('ruangan.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>

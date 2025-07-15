@@ -13,7 +13,7 @@
                   <div>
                     <a href="{{ route('ruangan.create') }}"class="btn btn-info mb-3">Tambah Ruangan</a>
                   </div>
-                    <table class="table" id="dataKategori">
+                    <table class="responsive table "  id="dataRuangan">
                       @include('sweetalert::alert')
                     <thead>
                       <th>No</th>
@@ -24,7 +24,7 @@
                       <th>Deskripsi</th>
                       
                       <th>Gambar</th>
-
+                      <th>Denah</th>
                       <th>Aksi</th>
                     </thead>
                      <tbody>
@@ -32,15 +32,31 @@
                      <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $ruang->nama_ruangan}}</td>
-                        <td>{{ $ruang->kategori->nama_kategori}}</td>
+                        <td>{{ $ruang->kategori->kategori}}</td>
                         <td>Lantai {{ $ruang->lantai->lantai }} Gedung {{ $ruang->lantai->gedung->nama_gedung }}</td>
-                        <td>@foreach ($fasilitas as $fas)
-                        {{ $fas->nama_fasilitas }}
-                        @endforeach</td>
-                        <td>{{ $ruang->deskripsi}}</td>
+                        <td>
+                          <ol>
+                          @foreach ($ruang->fasilitas as $fas)
+                            <li>{{ $fas->nama_fasilitas }} </li>
+                          @endforeach
+                          </ol>
+                        </td>
+                        <td > <p alt="{{ $ruang->deskripsi }}">{{Str::limit($ruang->deskripsi, 10, '...') }}</p> </td>
                         <td>
                             @if($ruang->gambar)
-                                <img src="{{asset('storage/'.$ruang->gambar)  }}" width="100px" height="50px" alt="">
+                            <a href="{{ asset('storage/'.$ruang->gambar) }}">
+                                <img src="{{asset('storage/'.$ruang->gambar)  }}" width="50px" height="50px" alt="">
+                            </a>
+                                @else
+                                <p>Tidak Ada</p>
+                            
+                            @endif
+                        </td>
+                        <td>
+                          @if($ruang->denah)
+                          <a href="{{ asset('storage/'.$ruang->denah) }}">
+                                <img src="{{asset('storage/'.$ruang->denah)  }}" width="50px" height="50px" alt="">
+                                </a>
                             @else
                                 <p>Tidak Ada</p>
                             
@@ -48,14 +64,17 @@
                         </td>
 
                         
-                        <td><a href="{{ route('ruangan.edit', $ruang->id) }}" class="btn btn-success">Edit</a>
-                        <a href="{{ route('ruangan.show', $ruang->id) }}" class="btn btn-warning">Detail</a>
+                        <td >
+                          <div class="d-flex justify-content-between">
+                              <a href="{{ route('ruangan.edit', $ruang->id) }}" class="btn btn-success">Edit</a>
+                        <a href="{{ route('ruangan.show', $ruang->id) }}" class="btn btn-warning">Detail </a>
                         <form action="{{ route('ruangan.destroy', $ruang->id) }}" onsubmit="return confirmDelete(this);" method="post" style="display:inline;" >
                             @csrf
                             @method('DELETE')
                             <button  class="btn btn-danger">Hapus</button>
-
                         </form>
+                          </div>
+                        
                         </td>
                       </tr>
                       @endforeach
@@ -114,12 +133,13 @@
             <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
           <script>
-        $(document).ready(function () {
-          $('#dataKategori').DataTable({
+        
+          $('#dataRuangan').DataTable({
             responsive: true,
-            autoWidth: false
+            autoWidth: false,
+            scrollX:true
           });
-        });
+      
       </script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -127,7 +147,7 @@ function confirmDelete(form) {
     event.preventDefault();
     Swal.fire({
         title: 'Yakin mau hapus?',
-        text: 'Data akan hilang selamanya lho!',
+        text: 'Data tidak akan bisa kembali',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#e3342f',
@@ -145,5 +165,4 @@ function confirmDelete(form) {
 
 @endpush
 
-  </body>
-</html>
+  

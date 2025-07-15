@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Edit Lantai</title>
 
     <meta name="description" content="" />
 
@@ -83,12 +83,21 @@
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
                 <div class="col">
-                    <h2>Tambah Data Gedung</h2>
+                    <h2>Edit Data Lantai</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('lantai.update', $lantai->id) }}" class="form" method="post">
                     @csrf
                     @method('PUT')
                     <label for="">Lantai</label>
-                    <input type="number" class="form-control" name="lantai">
+                    <input type="number" value="{{ $lantai->lantai }}" class="form-control" name="lantai">
                      <label for="">Gedung</label>
                     <select name="gedung_id" id="" class="form-select">
                         <option value="" disabled selected>Pilih salah satu gedung</option>
@@ -98,7 +107,7 @@
                     </select>
                     
                     
-                    <button type="submit" class="btn btn-info mt-2">Tambah</button>
+                    <button type="submit" class="btn btn-success  mt-2">Edit</button>
                   </form>
                 </div>
               </div>

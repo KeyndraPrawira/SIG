@@ -84,15 +84,25 @@
               <div class="row">
                 <div class="col">
                     <h2>Tambah Data Ruangan</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('ruangan.store') }}" class="form " enctype="multipart/form-data" method="post">
                     @csrf
-                    <label for="" class="mt-2">Nama Gedung</label>
+                    <label for="" class="mt-2">Nama Ruangan</label>
                     <input type="text" class="form-control" name="nama_ruangan">
 
                     <label for="" class="mt-2" >Kategori</label>
                     <select name="kategori_id" id="" class="form-select ">
+                      <option value="" disabled selected>Pilih kategori ruangan</option>
                         @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                            <option value="{{ $kat->id }}">{{ $kat->kategori }}</option>
                         @endforeach
                     </select>
 
@@ -100,7 +110,9 @@
                          Lokasi
                     </label >
                     <select name="lantai_id" id="" class="form-select ">
+                      <option value="" disabled selected>Pilih lokasi ruangan</option>
                         @foreach ($lantai as $lokasi)
+                          
                             <option value="{{ $lokasi->id }}">Lantai {{ $lokasi->lantai }}  Gedung {{ $lokasi->gedung->nama_gedung }}</option>
                         @endforeach
                     </select>
@@ -109,7 +121,9 @@
                     </label><br>
                     
                        @foreach ($fasilitas as $fas)
-                     <input type="checkbox" name="fasilitas_id"  class="form-checkbox mt-1" id="checkbox" value="{{ $fas->id }}"> <span for="#checkbox"> {{ $fas->nama_fasilitas }}</span> 
+                     <input type="checkbox" name="fasilitas_id[]"  class="form-checkbox mt-1" id="checkbox" value="{{ $fas->id }}"> 
+                     <span for="#checkbox"> {{ $fas->nama_fasilitas }}</span> <br>
+                     
                        @endforeach
                     <br>
                     <label for="" class="mt-2">
@@ -121,6 +135,11 @@
                         Gambar
                     </label>
                     <input type="file" class="form-control" name="gambar">
+
+                    <label for="" class="mt-2">
+                        Denah
+                    </label>
+                    <input type="file" class="form-control" name="denah">
                     
                     <button type="submit" class="btn btn-info mt-2">Tambah</button>
                   </form>

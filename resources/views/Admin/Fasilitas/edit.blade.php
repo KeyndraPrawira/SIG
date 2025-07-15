@@ -7,6 +7,15 @@
               <div class="row">
                 <div class="col">
                     <h2>Tambah Data Fasilitas</h2>
+                    @if ($errors->any())
+                                  <div class="alert alert-danger">
+                                      <ul>
+                                          @foreach ($errors->all() as $error)
+                                              <li>{{ $error }}</li>
+                                          @endforeach
+                                      </ul>
+                                  </div>
+                            @endif
                   <form action="{{ route('fasilitas.update', $fasilitas->id) }}" class="form" method="post">
                     @csrf
                     @method('PUT')
